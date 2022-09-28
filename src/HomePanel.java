@@ -1,3 +1,11 @@
+
+/**
+ * @author Amro Karar
+ * @version 1.0
+ * 
+ * Sets the home panel's dimensions and its mechanics
+ */
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -29,7 +37,10 @@ public class HomePanel extends JPanel implements ActionListener {
         setButton();
     }
 
-    // sets start button
+    /**
+     * Displays and sets the mechanics of the start button
+     * 
+     */
     private void setButton() {
         // Start Game Button
         button = new JButton();
@@ -61,7 +72,12 @@ public class HomePanel extends JPanel implements ActionListener {
         draw(g);
     }
 
-    // all the text and stuff
+    /**
+     * 
+     * @param g Graphics class
+     * 
+     *          Displays the game title
+     */
     private void draw(Graphics g) {
 
         g.setColor(Color.red);
@@ -79,7 +95,12 @@ public class HomePanel extends JPanel implements ActionListener {
         // SCREEN_HEIGHT / 2);
     }
 
-    @Override // sends the user to the game screen
+    @Override
+    /**
+     * Sends the user to the game screen
+     * 
+     * @param e ActionEvent object
+     */
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == button) {
             new GameFrame();

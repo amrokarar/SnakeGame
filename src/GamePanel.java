@@ -1,3 +1,11 @@
+
+/**
+ * @author Amro Karar
+ * @version 1.0
+ * 
+ * Sets the game panel's dimensions and the game mechanics
+ */
+
 import java.awt.*;
 //import java.awt.event.*;
 import javax.swing.*;
@@ -17,13 +25,19 @@ public class GamePanel extends JPanel implements ActionListener {
     static final int SCREEN_HEIGHT = 600; // height of the screen
     static final int UNIT_SIZE = 25;
     static final int GAME_UNTS = (SCREEN_WIDTH * SCREEN_HEIGHT) / UNIT_SIZE;
-    static final int DELAY = 150;
+    static final int DELAY = 150; // controls spd of the game
+
+    // holds the coordinates for the snake
     final int x[] = new int[GAME_UNTS];
     final int y[] = new int[GAME_UNTS];
+
     int bodyParts = 6; // number of starting parts on the snake
     int applesEaten; // tracks number of fruit eaten
+
+    // coordinats for the location of the apple
     int appleX;
     int appleY;
+
     char direction = 'R'; // current direction of snake
     boolean running = false; // state of the game at the moment
     boolean start = true;
@@ -39,6 +53,11 @@ public class GamePanel extends JPanel implements ActionListener {
         startGame();
     }
 
+    /**
+     * Starts the game by creating an apple,
+     * setting runnning value to true
+     * and starting the timer
+     */
     public void startGame() {
         newApple();
         running = true;
@@ -46,11 +65,19 @@ public class GamePanel extends JPanel implements ActionListener {
         timer.start();
     }
 
+    /**
+     * 
+     */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         draw(g);
     }
 
+    /**
+     * If game is running displays the apple, snake, and current score
+     * 
+     * @param g Graphics class
+     */
     public void draw(Graphics g) {
 
         if (running) {
@@ -93,14 +120,18 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }
 
-    // creates a new apple at a random spot
+    /**
+     * creates a new apple at a random spot
+     */
     public void newApple() {
         appleX = random.nextInt((int) (SCREEN_WIDTH / UNIT_SIZE)) * UNIT_SIZE;
         appleY = random.nextInt((int) (SCREEN_HEIGHT / UNIT_SIZE)) * UNIT_SIZE;
 
     }
 
-    // movement method for the snake
+    /**
+     * movement method for the snake
+     */
     public void move() {
         for (int i = bodyParts; i > 0; i--) {
             x[i] = x[i - 1];
@@ -125,7 +156,9 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }
 
-    // checks to see if apple is eaten
+    /**
+     * checks to see if apple is eaten
+     */
     public void checkApple() {
         if ((x[0] == appleX) && (y[0] == appleY)) {
             bodyParts++;
@@ -134,6 +167,9 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Checks if the snake has collided with its body or the borders
+     */
     public void checkCollisions() {
         // checks if head collides w/ body
         for (int i = bodyParts; i > 0; i--) {
@@ -169,6 +205,11 @@ public class GamePanel extends JPanel implements ActionListener {
 
     }
 
+    /**
+     * Displays the game over screen
+     * 
+     * @param g Graphics class
+     */
     public void gameOver(Graphics g) {
         // Score
         g.setColor(Color.red);
@@ -201,8 +242,22 @@ public class GamePanel extends JPanel implements ActionListener {
 
     }
 
+    /**
+     * 
+     * @author Amro Karar
+     * @version 1.0
+     * 
+     *          Class which extends the KeyAdapter class for the key controls
+     */
     public class MyKeyAdapter extends KeyAdapter {
         @Override
+        /**
+         * 
+         * @param e KeyEvent class for the keys pressed
+         * 
+         *          Uses a switch statement to determine the key presses and direct the
+         *          snake accordingly
+         */
         public void keyPressed(KeyEvent e) {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_LEFT: // if left key is pressed

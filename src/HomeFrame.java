@@ -1,3 +1,11 @@
+/**
+ * 
+ * @author Amro Karar
+ * @version 1.0
+ * 
+ * Creates the home frame for the game and initializes the HomePanel class on it
+ */
+
 // import java.awt.Color;
 // import java.awt.Font;
 // import java.awt.event.ActionEvent;

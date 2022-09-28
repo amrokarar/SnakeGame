@@ -1,3 +1,10 @@
+
+/**
+ * @author Amro Karar
+ * @version
+ * 
+ * Creates the frame for the game  
+ */
 import javax.swing.JFrame;
 
 public class GameFrame extends JFrame {
